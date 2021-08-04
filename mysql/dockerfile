@@ -3,7 +3,7 @@ FROM mysql:latest
 ADD script.sql /docker-entrypoint-initdb.d/script.sql
 RUN chmod -R 775 /docker-entrypoint-initdb.d
 
-ENV MYSQL_ROOT_PASSWORD mypass
-ENV MYSQL_DATABASE nodedb 
+ENV MYSQL_DATABASE nodedb  
+ENV MYSQL_PASSWORD root
 
 EXPOSE 3306

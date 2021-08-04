@@ -1,10 +1,11 @@
 const express = require('express');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 const app = express();
 const port = 3333;
 const config = {
-    host: 'mysql',
+    host: 'db',
+    port: 3306,
     user: 'root',
     password: 'root',
     database:'nodedb'
@@ -20,12 +21,11 @@ app.get('/', (req, res) => {
         if (err) throw err;
 
         con.query("SELECT name FROM people", function (err, result, fields) {
-            if (err) throw err;
-            html = html || `<h2> ${result} </h2>`;
+            if (err) throw err; 
+            html = `${html} <h2> ${result[0].name} </h2>`;
+            res.send(html); 
         });
-    });
- 
-    res.send(html); 
+    }); 
 })
 
 app.listen(port, ()=> {
