@@ -1,3 +1,2 @@
-# dockercompose-nginx-mysql-node
+# dockercompose samples
 
-Nginx as reverse proxy
