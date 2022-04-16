@@ -1,0 +1,45 @@
+version: "3"
+
+services:
+  nginx:
+    build:
+      dockerfile: ./docker/nginx.dockerfile
+      context: .
+    image: nginx-web
+    container_name: nginx
+    ports:
+      - "80:80" 
+    depends_on:
+      - "web" 
+  db:
+    image: kartoza/postgis:9.6-2.4
+    environment:
+      - USERNAME=admin
+      - PASS=admin
+
+  qgisserver:
+    build:
+      dockerfile: ./docker/qgis.dockerfile
+      context: .  
+    hostname: qgis-server
+    environment:
+      - QGIS_PROJECT_FILE=/project/project.qgs
+    volumes: 
+      - ./project:/project
+    links:
+      - db:db
+    ports:
+      - "5550:80"
+      
+  redis:
+    image: redis:5-alpine
+
+  web: 
+    build:
+      dockerfile: ./docker/node.dockerfile
+      context: .  
+    ports:
+      - "5551:8080"
+    depends_on:
+      - db
+      - qgisserver

@@ -1,0 +1,1 @@
+https://geoservicos.pbh.gov.br/geoserver/ide_bhgeo/ows?request=GetFeature&srsName=EPSG%3A31983&service=WFS&typeName=ide_bhgeo%3AHOSPITAIS&version=1.0.0&outputFormat=SHAPE-ZIP
